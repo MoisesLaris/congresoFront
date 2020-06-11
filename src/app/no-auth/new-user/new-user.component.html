@@ -1,0 +1,105 @@
+<main>
+    <section class="section section-shaped section-lg">
+        <div class="shape shape-style-1 bg-gradient-default">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="container pt-0">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="card bg-secondary shadow border-0">
+
+                        <div class="card-body px-lg-5 py-lg-4">
+                            <div class="text-center text-muted mb-3">
+                                <p>Registrate</p>
+                            </div>
+                            <form role="form" novalidate [formGroup]="newUserForm">
+
+                                <div class="form-group" [ngClass]="{'focused':focus===true}">
+                                    <div class="input-group input-group-alternative">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Nombre" type="text" (focus)="focus=true" (blur)="focus=false" formControlName="nombre">
+                                    </div>
+                                </div>
+                                <div class="form-group" [ngClass]="{'focused':focus1===true}">
+                                    <div class="input-group input-group-alternative">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Apellidos" type="text" (focus)="focus1=true" (blur)="focus1=false" formControlName="apellidos">
+                                    </div>
+                                </div>
+                                <div class="form-group" [ngClass]="{'focused':focus2===true}">
+                                    <div class="input-group input-group-alternative">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Semestre / Cuatrimestre" type="text" (keypress)="numberOnly($event)" (focus)="focus2=true" (blur)="focus2=false" formControlName="semestre">
+                                    </div>
+                                </div>
+                                <div class="form-group" [ngClass]="{'focused':focus3===true}">
+                                    <div class="input-group input-group-alternative">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Grupo" type="text" (keypress)="letterOnly($event)" (focus)="focus3=true" (blur)="focus3=false" formControlName="grupo" maxlength="1">
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3" [ngClass]="{'focused':focus4===true}">
+                                    <div class="input-group input-group-alternative">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Email" (focus)="focus4=true" (blur)="focus4=false" formControlName="correo">
+                                    </div>
+                                    <div *ngIf="newUserForm.get('correo').errors?.required && newUserForm.get('correo').touched"> <small>Se requiere email</small> </div>
+                                    <div *ngIf="newUserForm.get('correo').errors?.email && newUserForm.get('correo').touched"> <small>Email no valido</small> </div>
+
+                                </div>
+                                <div class="form-group" [ngClass]="{'focused':focus5===true}">
+                                    <div class="input-group input-group-alternative">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Contraseña" type="password" (focus)="focus5=true" (blur)="focus5=false" formControlName="password">
+                                    </div>
+                                </div>
+                                <div class="form-group" [ngClass]="{'focused':focus6===true}">
+                                    <div class="input-group input-group-alternative">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Verificar contraseña" type="password" (focus)="focus6=true" (blur)="focus6=false" formControlName="passwordVerify">
+                                    </div>
+                                    <div *ngIf="passwordVerify"> <small class="text-success">Contraseñas correctas</small> </div>
+
+                                </div>
+
+
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-primary my-4" (click)="onSubmit()" [disabled]="newUserForm.invalid">Iniciar Sesión</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-6">
+                            <a href="javascript:void(0)" class="text-light" (click)="goBack()">
+                                <small>Regresar</small>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

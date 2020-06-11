@@ -1,0 +1,6 @@
+/* You can add global styles to this file, and also import other style files */
+
+.datatable-header-cell {
+    display: flex !important;
+    align-items: center !important;
+}

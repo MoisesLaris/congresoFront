@@ -1,0 +1,27 @@
+.particle {
+    position: absolute;
+}
+
+@for $i from 1 through 12 {
+    @keyframes particle-animation-#{$i} {
+        100% {
+            opacity: 0;
+            transform: translate3d((random(160)-80 * 1vw), (random(80)-40 * 1vh), (random(100) * 1px));
+        }
+        90% {
+            opacity: (random(30)+20)/100;
+        }
+        15% {
+            opacity: (random(30)+20)/100;
+        }
+    }
+    .particle:nth-child(#{$i}) {
+        animation: particle-animation-#{$i} random(30)+20+s infinite;
+        $size: random(150) + 100 + px;
+        height: $size;
+        width: $size;
+        opacity: random(5)/100;
+        animation-delay: -$i * .2s;
+        transform: translate3d((random(160)-80 * 1vw), (random(80)-40 * 1vh), (random(100) * 1px));
+    }
+}

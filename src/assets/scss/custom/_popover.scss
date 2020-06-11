@@ -1,0 +1,43 @@
+.popover {
+    border: 0;
+}
+
+.popover-header {
+    font-weight: $font-weight-bold;
+}
+
+// Alternative colors
+@each $color,
+$value in $theme-colors {
+    .popover-#{$color} {
+        @include popover-variant($value);
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    -webkit-animation: fadeIn .8s;
+    animation: fadeIn .8s;
+}
+
+.fadeIn-fast {
+    -webkit-animation: fadeIn .5s;
+    animation: fadeIn .5s;
+}

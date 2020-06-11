@@ -1,0 +1,117 @@
+<main class="profile-page">
+    <section class="section-profile-cover section-shaped my-0">
+        <!-- Circles background -->
+        <div class="shape shape-style-1 shape-primary alpha-4">
+            <div id="particle-container">
+                <div class="particle" style="background-image: url(./assets/img/avocado-white.png); background-position: center center;
+                        background-size: cover;"></div>
+                <div class="particle" style="background-image: url(./assets/img/avocado-white.png); background-position: center center;
+                        background-size: cover;"></div>
+                <div class="particle" style="background-image: url(./assets/img/avocado-white.png); background-position: center center;
+                        background-size: cover;"></div>
+                <div class="particle" style="background-image: url(./assets/img/avocado-white.png); background-position: center center;
+                        background-size: cover;"></div>
+                <div class="particle" style="background-image: url(./assets/img/avocado-white.png); background-position: center center;
+                        background-size: cover;"></div>
+                <div class="particle" style="background-image: url(./assets/img/avocado-white.png); background-position: center center;
+                        background-size: cover;"></div>
+                <div class="particle" style="background-image: url(./assets/img/avocado-white.png); background-position: center center;
+                        background-size: cover;"></div>
+                <div class="particle" style="background-image: url(./assets/img/avocado-white.png); background-position: center center;
+                        background-size: cover;"></div>
+                <div class="particle" style="background-image: url(./assets/img/avocado-white.png); background-position: center center;
+                        background-size: cover;"></div>
+                <div class="particle" style="background-image: url(./assets/img/avocado-white.png); background-position: center center;
+                        background-size: cover;"></div>
+                <div class="particle" style="background-image: url(./assets/img/avocado-white.png); background-position: center center;
+                        background-size: cover;"></div>
+                <div class="particle" style="background-image: url(./assets/img/avocado-white.png); background-position: center center;
+                        background-size: cover;"></div>
+                <div class="particle" style="background-image: url(./assets/img/avocado-white.png); background-position: center center;
+                        background-size: cover;"></div>
+
+            </div>
+        </div>
+        <!-- SVG separator -->
+    </section>
+    <section class="section">
+        <div class="col-lg-10 col-md-10 col-sm-11 mx-auto">
+            <div class="card card-profile shadow mt--300">
+                <div class="px-4">
+                    <h2 class="display-3 text-center mt-5">Contact us</h2>
+                </div>
+                <div class="row">
+                    <div class="col-xl-6 col-lg-12 col-md-12">
+                        <div class="card-body mt-3">
+                            <h5 class="text-center mt-auto">Send Message</h5>
+                            <hr>
+                            <form style="background-color: rgba(220, 220, 220, 0.5); padding: 30px; border-radius: 10px;">
+
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative mb-4 mx-auto">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="First and last name" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative mb-4 mx-auto">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fas fa-at"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Email" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative mb-4 mx-auto">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="far fa-building"></i></span>
+                                        </div>
+                                        <input class="form-control" placeholder="Name of your business" type="text">
+                                    </div>
+                                </div>
+                                <select class="form-control input-group-alternative mx-auto mb-4" [(ngModel)]="industrySelected" [ngModelOptions]="{standalone: true}" (change)="change()">
+                                    <option value="-1" disabled> Select industry you're in</option>
+                                    <option *ngFor="let value of industry" [value]="value">{{value}}</option>
+                                </select>
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative mx-auto">
+                                        <textarea class="form-control" placeholder="Tell me a little bit about your business..." rows="4"></textarea>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                            <button class="btn btn-success btn-block mt-4" type="button">Send</button>
+                        </div>
+
+
+                    </div>
+                    <div class="col-xl-6 col-lg-12 col-md-12">
+                        <div class="card-body mt-5" data-aos="zoom-in" data-aos-once="true">
+                            <h5 class="text-center mt-auto">Partner With Us and See Positive Results</h5>
+                            <p class="mt-3 text-center">We believe that a business with a great marketing team can make an impact on the world. Take the first step: contact us, and together, we will reach your company's goals.</p>
+                        </div>
+                        <div class="card-body mt-3" data-aos="zoom-in" data-aos-once="true">
+                            <h5 class="text-center mt-auto">Avocado Ad Agency</h5>
+                            <p class="mt-3 text-center">2617 La Mesa Way, Sacramento, California 95825, United States</p>
+                        </div>
+                        <div class="card-body mt-3" data-aos="zoom-in" data-aos-once="true">
+                            <h5 class="text-center mt-auto">Hours</h5>
+                            <p class="mt-4 text-center"><span style="font-weight:600;">Monday - Friday:</span> 9am - 5pm</p><br>
+                            <p class="text-center"><span style="font-weight: 600;">Saturday - Sunday:</span> Closed</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-center my-4">
+                        <iframe class="mx-auto" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12471.598684908098!2d-121.4004729!3d38.6051794!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf7d727fe9fbee6cd!2sQuik%20DMV%20Registration%20Service%2C%20Inc!5e0!3m2!1ses!2smx!4v1587584005938!5m2!1ses!2smx"
+                            width="95%" height="300" frameborder="0" style="border-radius: 10px;" allowfullscreen="true" aria-hidden="false" tabindex="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

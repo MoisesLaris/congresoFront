@@ -1,0 +1,78 @@
+.particle2 {
+    position: absolute;
+    border-radius: 50%;
+}
+
+@for $i from 0 through 12 {
+    @keyframes particle-animation-#{$i} {
+        100% {
+            opacity: 0;
+            transform: translate3d((random(160) - 80 * 1vw), (random(160) - 80 * 1vh), (random(100) * 1px));
+        }
+        90% {
+            opacity: (random(50) + 20)/100;
+        }
+        5% {
+            opacity: random(15)/100;
+        }
+        0% {
+            opacity: 0;
+        }
+    }
+    .particle2:nth-child(#{$i}) {
+        animation: particle-animation-#{$i} random(20)+30+s infinite;
+        $size: random(120) + 100 + px;
+        opacity: random(65)/100;
+        height: $size;
+        width: $size;
+        animation-delay: -$i * .2s;
+        transform: translate3d((random(160) - 80 * 1vw), (random(160) - 80 * 1vh), (random(100) * 1px));
+        background: rgba(255, 255, 255, 0.75);
+    }
+}
+
+.page-header {
+    background: linear-gradient(150deg, #5db65d 15%, #85d499 70%, #57c95c 94%);
+    background-position: center center;
+    background-size: cover;
+    min-height: 100vh;
+    max-height: 999px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    /* Center vertically */
+    align-items: center;
+    /*Center horizontaly */
+    justify-content: center;
+    /*Center horizontaly ie */
+    -ms-flex-pack: center;
+    .filter::after {
+        background-color: rgba(0, 0, 0, 0.3);
+        //background-image: url('assets/img/little-knobs.png');
+        content: "";
+        display: block;
+        height: 100%;
+        left: 0;
+        top: 0;
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+    }
+    &.page-header-small {
+        min-height: 65vh !important;
+        max-height: 700px;
+    }
+    &.page-header-xs {
+        min-height: 40vh !important;
+    }
+    &.section-dark {
+        .content-center,
+        .category-absolute {
+            z-index: 1;
+        }
+    }
+}

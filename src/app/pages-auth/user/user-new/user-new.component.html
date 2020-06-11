@@ -1,0 +1,63 @@
+<h2 class="display-3 text-center mt-5">
+    Nuevo Usuario</h2>
+<div class="row">
+    <div class="col-12">
+        <div class="card my-4">
+            <div class="card-header">
+                <ul class="nav nav-pills card-header-pills">
+                    <li class="nav-item">
+                        <a class="btn btn-primary btn-sm" (click)="goBack()" href="javascript:void(0)"> <i class="fas fa-arrow-left"></i> Regresar</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="card-body">
+                <form role="form" novalidate [formGroup]="newUserForm" class="row">
+                    <div class="form-group col-md-6 col-sm-12">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
+                    </div>
+                    <div class="form-group col-md-6 col-sm-12">
+                        <label>Apellidos</label>
+                        <input type="text" class="form-control" placeholder="Apellidos" formControlName="apellidos">
+                    </div>
+                    <div class="form-group col-md-6 col-sm-12">
+                        <label>Semestre/Cuatrimestre</label>
+                        <input type="text" class="form-control" placeholder="Semestre/Cuatrimestre" formControlName="semestre" (keypress)="numberOnly($event)">
+                    </div>
+                    <div class="form-group col-md-6 col-sm-12">
+                        <label>Grupo</label>
+                        <input type="text" class="form-control" placeholder="Grupo" formControlName="grupo" (keypress)="letterOnly($event)" maxlength="1">
+                    </div>
+
+                    <div class="form-group col-md-12 col-sm-12">
+                        <label>Correo electrónico</label>
+                        <input type="text" class="form-control" placeholder="Correo electrónico" formControlName="correo">
+                    </div>
+                    <div class="form-group col-md-12 col-sm-12">
+                        <label>Contraseña</label>
+                        <input type="password" class="form-control" placeholder="Contraseña" formControlName="password">
+                    </div>
+                    <div class="form-group col-md-12 col-sm-12 ml-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [value]="1" formControlName="tipoUsuario">
+                            <label class="form-check-label">
+                              Usuario
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [value]="0" formControlName="tipoUsuario">
+                            <label class="form-check-label">
+                              Administrador
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <button type="button" class="btn btn-primary mx-auto" [disabled]="this.newUserForm.invalid" (click)="onSubmit()">Guardar</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
