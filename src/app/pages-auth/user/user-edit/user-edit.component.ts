@@ -43,7 +43,7 @@ export class UserEditComponent implements OnInit {
       this.fnLoadData(res);
     })
     .catch((err)=>{
-      console.log(err);
+      this.toasr.error(err);
     })
   }
 

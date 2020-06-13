@@ -9,6 +9,7 @@ import { routesUser } from './user.routing';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserNewComponent } from './user-new/user-new.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ModalModule } from 'ngb-modal';
 
 
 
@@ -20,6 +21,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     RouterModule.forChild(routesUser),
     ReactiveFormsModule,
     NgxDatatableModule,
+    ModalModule
   ]
 })
 export class UserModule { }

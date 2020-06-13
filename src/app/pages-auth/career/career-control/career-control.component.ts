@@ -1,59 +1,55 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
-import { Location } from '@angular/common';
+import { CareerModel } from 'src/app/models/career.model';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
-import { UserModel } from 'src/app/models/user.model';
+import { CareerService } from 'src/app/services/career.service';
 import { ModalManager } from 'ngb-modal';
 import { ToastrService } from 'ngx-toastr';
 
-
 @Component({
-  selector: 'app-user-control',
-  templateUrl: './user-control.component.html',
-  styles: []
+  selector: 'app-career-control',
+  templateUrl: './career-control.component.html',
+  styleUrls: ['./career-control.component.css']
 })
-export class UserControlComponent implements OnInit {
-
+export class CareerControlComponent implements OnInit {
 
   rows = [];
   temp = [];
   selected = [];
 
   columns = [
-    { prop: 'nombre' },
-    { name: 'apellidos' },
-    { name: 'correo' },
-    { name: 'id' }
+    { prop: 'id' },
+    { name: 'nombre' },
+    { name: 'centro' },
   ];
 
   tableLoaded = false;
 
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
-  recoveryArray_users: UserModel[] = [];
+  recoveryArray_careers: CareerModel[] = [];
 
   @ViewChild('myModal') myModal;
   modalRef;
-  
+
   constructor(
     private router: Router,
-    private userService: UserService,
+    private careerService: CareerService,
     private modalService: ModalManager,
     private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
-    this.fnGetAllUsers();
+    this.fnGetAllCareers();
   }
 
-  fnGetAllUsers(){
+  fnGetAllCareers(){
     this.tableLoaded = false;
-    this.userService.fnGetAllUsers()
+    this.careerService.fnGetAllCareers()
     .then((res)=>{
 
       console.log(res);
-      this.recoveryArray_users = res;
+      this.recoveryArray_careers = res;
       this.fnLoadTable();
     
     })
@@ -64,8 +60,8 @@ export class UserControlComponent implements OnInit {
 
   fnLoadTable(): void {
     let anyArray_data: any[] = [];
-    this.recoveryArray_users.forEach(obj => {
-      let any_transformObj = this.fnTransformObj(obj, ['nombre', 'apellidos','correo']);
+    this.recoveryArray_careers.forEach(obj => {
+      let any_transformObj = this.fnTransformObj(obj, ['nombre', 'centro']);
       anyArray_data.push(any_transformObj);
     });
     this.temp = [...anyArray_data];
@@ -107,15 +103,15 @@ export class UserControlComponent implements OnInit {
 
   fnEdit(id){
     console.log(id);
-    this.router.navigate(['/system/user/edit',id]);
+    this.router.navigate(['/system/career/edit',id]);
   }
 
   fnDelete(){
-    console.log(this.empleadoEliminar);
-    this.userService.fnPostDeleteUser(this.empleadoEliminar)
+    console.log(this.idEliminar);
+    this.careerService.fnPostDeleteCareer(this.idEliminar)
     .then((res) => {
       this.toastr.success(res);
-      this.fnGetAllUsers();
+      this.fnGetAllCareers();
     })
     .catch((err) => {
       this.toastr.error(err);
@@ -123,10 +119,10 @@ export class UserControlComponent implements OnInit {
     this.modalService.close(this.modalRef);
   }
   
-  empleadoEliminar;
+  idEliminar;
 
   openModal(id){
-    this.empleadoEliminar = id;
+    this.idEliminar = id;
     this.modalRef = this.modalService.open(this.myModal, {
         size: "md",
         modalClass: 'mymodal',
@@ -143,5 +139,5 @@ closeModal(){
     this.modalService.close(this.modalRef);
     //or this.modalRef.close();
 }
-  
+
 }

@@ -28,6 +28,7 @@
         "jw-bootstrap-switch-ng2": "2.0.5",
         "moment": "^2.24.0",
         "ng2-nouislider": "1.7.13",
+        "ngb-modal": "^2.0.3",
         "ngx-datatable": "^1.0.3",
         "ngx-toastr": "^12.1.0",
         "node-sass": "^4.8.1",

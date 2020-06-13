@@ -70,5 +70,21 @@ export class UserService {
     })
   }
 
+  fnPostDeleteUser(id): Promise<any>{
+    return new Promise((resolve,reject) => {
+      this.apiCallService.fnPostWithParamsPromise({},[id],APIS_ENUM.POST_DELETE_USER)
+      .then((res: ResponseModel)=> {
+        if(res.success){
+          resolve(res.message);
+        }else{
+          reject(res.message);
+        }
+      })
+      .catch(err => {
+        reject("Error en la conexión");
+      })
+    })
+  }
+
 
 }

@@ -1,7 +1,7 @@
 <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom headroom--top headroom--pinned">
     <div class="container">
         <a class="navbar-brand mr-lg-5" [routerLink]="['/home']">
-            <img src="./assets/img/logo-white.png">
+            <img src="./assets/img/congreso.png" style="height: 70px;">
         </a>
         <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
       <span class="navbar-toggler-icon"></span>
@@ -11,7 +11,7 @@
                 <div class="row">
                     <div class="col-6 collapse-brand">
                         <a [routerLink]="['/home']">
-                            <img src="./assets/img/logo.png">
+                            <img src="./assets/img/congreso.png">
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
@@ -27,6 +27,13 @@
                     <a class="nav-link no-caret" data-toggle="dropdown" role="button" [routerLink]="['/system/user/control']">
                         <i class="ni ni-ui-04 d-lg-none"></i>
                         <span class="nav-link-inner--text">Usuarios</span>
+                    </a>
+
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link no-caret" data-toggle="dropdown" role="button" [routerLink]="['/system/career/control']">
+                        <i class="ni ni-ui-04 d-lg-none"></i>
+                        <span class="nav-link-inner--text">Carreras</span>
                     </a>
 
                 </li>
