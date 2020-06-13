@@ -16,5 +16,8 @@ export enum APIS_ENUM {
     GET_ALL_CAREERS = '/api/getCarreras',
     GET_CAREER_BY_ID = '/api/getCarrera/?',
     POST_EDIT_CAREER = '/api/updateCarrera/?',
-    POST_DELETE_CAREER = '/api/deletecarrera/?'
+    POST_DELETE_CAREER = '/api/deletecarrera/?',
+
+    //FAQ
+    GET_ALL_FAQ = '/api/getFaqs',
 }

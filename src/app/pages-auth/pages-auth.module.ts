@@ -11,7 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
-  declarations: [PagesAuthRoutingComponent, HomeSystemComponent, HomeSystemComponent, NavbarComponent],
+  declarations: [PagesAuthRoutingComponent, HomeSystemComponent, HomeSystemComponent, NavbarComponent,],
   imports: [
     NgbModule,
     CommonModule,
