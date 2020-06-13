@@ -5,6 +5,8 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { UserModel } from 'src/app/models/user.model';
 import { Location } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { CareerService } from 'src/app/services/career.service';
+import { CareerModel } from 'src/app/models/career.model';
 
 @Component({
   selector: 'app-user-edit',
@@ -14,19 +16,21 @@ import { ToastrService } from 'ngx-toastr';
 export class UserEditComponent implements OnInit {
 
   idUser;
-
+  arrayCareers:CareerModel[] = [];
 
   editUserForm = new FormGroup({
     nombre: new FormControl(null, [Validators.required]),
     apellidos: new FormControl(null, [Validators.required]),
     semestre: new FormControl(null, [Validators.required, Validators.maxLength(1)]),
     grupo: new FormControl(null, [Validators.required,Validators.maxLength(1)]),
-    tipoUsuario: new FormControl(null, Validators.required)
+    tipoUsuario: new FormControl(null, Validators.required),
+    idCarrera: new FormControl(null, Validators.required)
   });
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
+    private careerService: CareerService,
     private toasr: ToastrService,
     private location: Location
   ) { }
@@ -34,6 +38,17 @@ export class UserEditComponent implements OnInit {
   ngOnInit(): void {
     this.idUser = this.route.snapshot.params.id;
     this.fnGetUserById();
+    this.fnGetAllCareers();
+  }
+
+  fnGetAllCareers(){
+    this.careerService.fnGetAllCareers()
+    .then(res => {
+      console.log(res);
+      this.arrayCareers = res;
+    })
+    .catch(err => {
+    })
   }
 
   fnGetUserById(){
@@ -53,7 +68,8 @@ export class UserEditComponent implements OnInit {
       apellidos: obj.apellidos,
       semestre: obj.semestre,
       grupo: obj.grupo,
-      tipoUsuario: obj.tipoUsuario
+      tipoUsuario: obj.tipoUsuario,
+      idCarrera: obj.idCarrera
     })
   }
   numberOnly(event){

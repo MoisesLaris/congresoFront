@@ -7,4 +7,5 @@ export class UserModel{
     password: string;
     semestre: number;
     grupo: string;
+    idCarrera: string;
 }
