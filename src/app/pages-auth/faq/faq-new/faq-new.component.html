@@ -1,1 +1,55 @@
-<p>faq-new works!</p>
+<h2 class="display-3 text-center mt-5">
+    Nuevo Usuario</h2>
+<div class="row">
+    <div class="col-12">
+        <div class="card my-4">
+            <div class="card-header">
+                <ul class="nav nav-pills card-header-pills">
+                    <li class="nav-item">
+                        <a class="btn btn-primary btn-sm" (click)="goBack()" href="javascript:void(0)"> <i class="fas fa-arrow-left"></i> Regresar</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="card-body">
+                <form role="form" novalidate [formGroup]="newUserForm" class="row">
+                    <div class="form-group col-md-6 col-sm-12">
+                        <label>Pregunta</label>
+                        <input type="text" class="form-control" placeholder="Nombre" formControlName="comentario">
+                    </div>
+                    <div class="form-group col-md-6 col-sm-12">
+                        <label>Respuesta</label>
+                        <input type="text" class="form-control" placeholder="Apellidos" formControlName="respuesta">
+                    </div>
+
+                    <div class="form-group col-md-12 col-sm-12">
+                        <label>Carrera</label>
+                        <select class="form-control" formControlName="idCongreso">
+                            <option *ngFor="let congreso of arrayCongresos" [value]="congreso._id">{{congreso.nombre}}</option>
+                        </select>
+
+                    </div>
+
+                    <div class="form-group col-md-12 col-sm-12 ml-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [value]="1" formControlName="tipoUsuario">
+                            <label class="form-check-label">
+                              Usuario
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" [value]="0" formControlName="tipoUsuario">
+                            <label class="form-check-label">
+                              Administrador
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <button type="button" class="btn btn-primary mx-auto" [disabled]="this.newUserForm.invalid" (click)="onSubmit()">Guardar</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

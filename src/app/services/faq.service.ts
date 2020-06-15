@@ -16,7 +16,7 @@ export class FaqService {
       this.apiCallService.fnGetPromise([],APIS_ENUM.GET_ALL_FAQ)
       .then(res => {
         console.log(res);
-        resolve(res['faq']);
+        resolve(res['faqs']);
       })
       .catch(err => {
         reject("Error de conexión");
