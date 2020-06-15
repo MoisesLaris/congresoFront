@@ -10,7 +10,9 @@ export const routesPagesAuth: Routes = [
         { path: '', redirectTo: 'home', pathMatch: 'full' },
         { path: 'home', component: HomeSystemComponent },
         { path: 'user', loadChildren: './user/user.module#UserModule'},
-        { path: 'career', loadChildren: './career/career.module#CareerModule'}
+        { path: 'career', loadChildren: './career/career.module#CareerModule'},
+        { path: 'congress', loadChildren: './congreso/congreso.module#CongresoModule'}
+
         
       ]
     }

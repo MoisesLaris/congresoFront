@@ -4,6 +4,12 @@ export enum APIS_ENUM {
     POST_NEW_USER = '/api/newUser',
     GET_USER_BY_TOKEN = '/api/getUserByToken',
     
+    //CONGRESS
+    GET_CONGRESS_BY_ID = '/api/getCongreso/?',
+    GET_ALL_CONGRESS = '/api/getCongresos',
+    POST_DELETE_CONGRESS = '/api/deleteCongreso/?',
+    POST_EDIT_CONGRESS = '/api/updateCongreso/?',
+    POST_NEW_CONGRESS = '/api/newCongreso',  
 
     //USER
     GET_USER_BY_ID = '/api/getUser/?',
