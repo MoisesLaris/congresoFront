@@ -11,9 +11,13 @@ export const routesPagesAuth: Routes = [
         { path: 'home', component: HomeSystemComponent },
         { path: 'user', loadChildren: './user/user.module#UserModule'},
         { path: 'career', loadChildren: './career/career.module#CareerModule'},
+<<<<<<< HEAD
         { path: 'congress', loadChildren: './congreso/congreso.module#CongresoModule'}
 
         
+=======
+        { path: 'faq', loadChildren: './faq/faq.module#FaqModule'}
+>>>>>>> ABC_FAQ
       ]
     }
   ]

@@ -21,7 +21,7 @@ export class UserEditComponent implements OnInit {
   editUserForm = new FormGroup({
     nombre: new FormControl(null, [Validators.required]),
     apellidos: new FormControl(null, [Validators.required]),
-    semestre: new FormControl(null, [Validators.required, Validators.maxLength(1)]),
+    semestre: new FormControl(null, [Validators.required]),
     grupo: new FormControl(null, [Validators.required,Validators.maxLength(1)]),
     tipoUsuario: new FormControl(null, Validators.required),
     idCarrera: new FormControl(null, Validators.required)

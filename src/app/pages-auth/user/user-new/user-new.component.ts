@@ -42,9 +42,11 @@ export class UserNewComponent implements OnInit {
     .then(res => {
       console.log(res);
       this.arrayCareers = res;
+
       this.newUserForm.patchValue({
         idCarrera: this.arrayCareers[0]._id
       })
+      
     })
     .catch(err => {
     })
