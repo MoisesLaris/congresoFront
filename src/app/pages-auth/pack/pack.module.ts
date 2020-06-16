@@ -1,28 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FaqControlComponent } from './faq-control/faq-control.component';
-import { FaqEditComponent } from './faq-edit/faq-edit.component';
-import { FaqRoutingComponent } from './faq-routing/faq-routing.component';
-import { FaqNewComponent } from './faq-new/faq-new.component';
+import { PackControlComponent } from './pack-control/pack-control.component';
+import { PackEditComponent } from './pack-edit/pack-edit.component';
+import { PackNewComponent } from './pack-new/pack-new.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ModalModule } from 'ngb-modal';
-import { routesFaq } from './faq.routing';
+import { routesPack } from './pack.routing';
+import { PackRoutingComponent } from './pack-routing/pack-routing.component';
 
 
 
 @NgModule({
-  declarations: [FaqControlComponent, FaqEditComponent, FaqRoutingComponent, FaqNewComponent],
+  declarations: [PackControlComponent, PackEditComponent, PackNewComponent, PackRoutingComponent],
   imports: [
     NgbModule,
     CommonModule,
-    RouterModule.forChild(routesFaq),
+    RouterModule.forChild(routesPack),
     ReactiveFormsModule,
     NgxDatatableModule,
     ModalModule,
     FormsModule
   ]
 })
-export class FaqModule { }
+export class PackModule { }

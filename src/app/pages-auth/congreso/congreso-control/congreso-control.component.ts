@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 import { ModalManager } from 'ngb-modal';
 import { ToastrService } from 'ngx-toastr';
 import { CongresoModule } from '../congreso.module';
+import { CareerService } from 'src/app/services/career.service';
+import { CareerModule } from '../../career/career.module';
+import { CareerModel } from 'src/app/models/career.model';
+import { CongressModel } from 'src/app/models/congress.model';
 
 @Component({
   selector: 'app-congreso-control',
@@ -21,11 +25,14 @@ export class CongresoControlComponent implements OnInit {
     { name: 'nombre' }
   ];
 
-  tableLoaded = false;
+  tableLoaded = true;
+
+  carreraSelected=-1;
 
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
-  recoveryArray_congress: CongresoModule[] = [];
+  recoveryArray_congress: CongressModel[] = [];
+  recoveryArray_career: CareerModel[] = [];
 
   @ViewChild('myModal') myModal;
   modalRef;
@@ -33,17 +40,26 @@ export class CongresoControlComponent implements OnInit {
   constructor(
     private router: Router,
     private congressService: CongresoService,
+    private careerService: CareerService,
     private modalService: ModalManager,
     private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
-    this.fnGetAllCongress();
+    this.fnGetAllCareers();
   }
 
-  fnGetAllCongress(){
+  fnGetAllCareers(){
+    this.careerService.fnGetAllCareers()
+    .then(res => {
+      this.recoveryArray_career = res;
+    })
+    .catch(()=>{});
+  }
+
+  fnGetAllCongressByCareer(){
     this.tableLoaded = false;
-    this.congressService.fnGetAllCongress()
+    this.congressService.fnGetCongressByCareer(this.carreraSelected)
     .then((res)=>{
 
       console.log(res);
@@ -109,7 +125,7 @@ export class CongresoControlComponent implements OnInit {
     this.congressService.fnPostDeleteCongress(this.idEliminar)
     .then((res) => {
       this.toastr.success(res);
-      this.fnGetAllCongress();
+      this.fnGetAllCongressByCareer();
     })
     .catch((err) => {
       this.toastr.error(err);
@@ -136,5 +152,9 @@ export class CongresoControlComponent implements OnInit {
 closeModal(){
     this.modalService.close(this.modalRef);
     //or this.modalRef.close();
+}
+
+fnChangeCareer(){
+  this.fnGetAllCongressByCareer();
 }
 }

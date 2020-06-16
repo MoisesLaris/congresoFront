@@ -10,6 +10,7 @@ export enum APIS_ENUM {
     POST_DELETE_CONGRESS = '/api/deleteCongreso/?',
     POST_EDIT_CONGRESS = '/api/updateCongreso/?',
     POST_NEW_CONGRESS = '/api/newCongreso',  
+    GET_CONGRESS_BY_CAREER = '/api/getCongresos/idCarrera/?',
 
     //USER
     GET_USER_BY_ID = '/api/getUser/?',
@@ -26,4 +27,12 @@ export enum APIS_ENUM {
 
     //FAQ
     GET_ALL_FAQ = '/api/getFaqs',
+    POST_NEW_FAQ = '/api/newFAQ',
+    GET_FAQ_BY_ID = '/api/getFaq/?',
+    POST_EDIT_FAQ = '/api/updateFaq/?',
+    GET_ALL_FAQ_BY_CONGRESS = '/api/getFaq/idCongreso/?',
+
+    //PACKAGE
+
+    POST_EDIT_PACKAGE ='/api/getTipoPago/?'
 }

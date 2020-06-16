@@ -1,28 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FaqControlComponent } from './faq-control/faq-control.component';
-import { FaqEditComponent } from './faq-edit/faq-edit.component';
-import { FaqRoutingComponent } from './faq-routing/faq-routing.component';
-import { FaqNewComponent } from './faq-new/faq-new.component';
+import { ActivityRoutingComponent } from './activity-routing/activity-routing.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ModalModule } from 'ngb-modal';
-import { routesFaq } from './faq.routing';
+import { routesActivity } from './activity.routing';
 
 
 
 @NgModule({
-  declarations: [FaqControlComponent, FaqEditComponent, FaqRoutingComponent, FaqNewComponent],
+  declarations: [ActivityRoutingComponent],
   imports: [
     NgbModule,
     CommonModule,
-    RouterModule.forChild(routesFaq),
+    RouterModule.forChild(routesActivity),
     ReactiveFormsModule,
     NgxDatatableModule,
     ModalModule,
     FormsModule
   ]
 })
-export class FaqModule { }
+export class ActivityModule { }

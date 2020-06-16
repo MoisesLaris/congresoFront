@@ -1,52 +1,54 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FaqModel } from 'src/app/models/faq.model';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { CongressModel } from 'src/app/models/congress.model';
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ModalManager } from 'ngb-modal';
-import { ToastrService } from 'ngx-toastr';
-import { FaqService } from 'src/app/services/faq.service';
-import { CongressModel } from 'src/app/models/congress.model';
 import { CongresoService } from 'src/app/services/congreso.service';
+import { PackageModel } from 'src/app/models/package.model';
 
 @Component({
-  selector: 'app-faq-control',
-  templateUrl: './faq-control.component.html',
-  styles: []
+  selector: 'app-pack-control',
+  templateUrl: './pack-control.component.html',
+  styleUrls: ['./pack-control.component.css']
 })
-export class FaqControlComponent implements OnInit {
+export class PackControlComponent implements OnInit {
+
+  congresoSelected = -1;
+
 
   rows = [];
   temp = [];
   selected = [];
 
   columns = [
-    { prop: 'id' },
-    { name: 'comentario' },
-    { name: 'respuesta' },
+    { prop: 'nombre' },
+    { name: 'apellidos' },
+    { name: 'correo' },
+    { name: 'id' }
   ];
 
-  congresoSelected = -1;
   tableLoaded = true;
 
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
-  recoveryArray_faq: FaqModel[] = [];
   recoveryArray_congress: CongressModel[] = [];
+  recoveryArray_package: PackageModel[] = [];
 
   @ViewChild('myModal') myModal;
   modalRef;
-  
+
   constructor(
     private router: Router,
-    private faqService: FaqService,
-    private modalService: ModalManager,
     private congressService: CongresoService,
+    private modalService: ModalManager,
     private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
     this.fnGetAllCongress();
   }
+
   fnGetAllCongress(){
     this.congressService.fnGetAllCongress()
     .then(res => {
@@ -54,26 +56,13 @@ export class FaqControlComponent implements OnInit {
     })
     .catch(() => {
 
-    })
-  }
-
-  fnGetAllFaqByCongress(){
-    this.tableLoaded = false;
-    this.faqService.fnGetFaqByCongress(this.congresoSelected)
-    .then((res)=>{
-      console.log(res);
-      this.recoveryArray_faq = res;
-      this.fnLoadTable();
-    })
-    .catch((rej)=>{
-      console.log(rej);    
     });
   }
 
   fnLoadTable(): void {
     let anyArray_data: any[] = [];
-    this.recoveryArray_faq.forEach(obj => {
-      let any_transformObj = this.fnTransformObj(obj, ['comentario', 'respuesta']);
+    this.recoveryArray_package.forEach(obj => {
+      let any_transformObj = this.fnTransformObj(obj, ['nombre', 'apellidos','correo']);
       anyArray_data.push(any_transformObj);
     });
     this.temp = [...anyArray_data];
@@ -115,26 +104,25 @@ export class FaqControlComponent implements OnInit {
 
   fnEdit(id){
     console.log(id);
-    this.router.navigate(['/system/faq/edit',id]);
+    this.router.navigate(['/system/user/edit',id]);
   }
 
-  fnDelete(){
-    console.log(this.idEliminar);
-    // this.faqService.fnPostDeleteCareer(this.idEliminar)
-    // .then((res) => {
-    //   this.toastr.success(res);
-    //   this.fnGetAllFaq();
-    // })
-    // .catch((err) => {
-    //   this.toastr.error(err);
-    // });
-    this.modalService.close(this.modalRef);
-  }
+  // fnDelete(){
+  //   console.log(this.empleadoEliminar);
+  //   this.congressService.fnPostDeleteUser(this.empleadoEliminar)
+  //   .then((res) => {
+  //     this.toastr.success(res);
+  //   })
+  //   .catch((err) => {
+  //     this.toastr.error(err);
+  //   });
+  //   this.modalService.close(this.modalRef);
+  // }
   
-  idEliminar;
+  empleadoEliminar;
 
   openModal(id){
-    this.idEliminar = id;
+    this.empleadoEliminar = id;
     this.modalRef = this.modalService.open(this.myModal, {
         size: "md",
         modalClass: 'mymodal',
@@ -150,10 +138,6 @@ export class FaqControlComponent implements OnInit {
 closeModal(){
     this.modalService.close(this.modalRef);
     //or this.modalRef.close();
-}
-
-fnChangeCongress(){
-  this.fnGetAllFaqByCongress();
 }
 
 }

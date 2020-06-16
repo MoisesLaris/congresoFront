@@ -4,8 +4,15 @@ export class LoginResponseModel{
     
         success: boolean;
         token: string;
-        tipoUsuario: Number;
+        tipoUsuario: number;
         message: string;
-        idSession: any;
-      
+        user: {
+                apellidos: string;
+                correo: string;
+                grupo: string;
+                nombre: string;
+                semestre: string;
+                sub: string;
+                tipoUsuario: number;
+        }
 }

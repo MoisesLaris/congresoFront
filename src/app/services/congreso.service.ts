@@ -41,7 +41,6 @@ export class CongresoService {
   }
   
   fnPostDeleteCongress(id): Promise<any>{
-    console.log(id+"hola");
     return new Promise((resolve, reject) => {
       this.apiCallService.fnPostWithParamsPromise({},[id],APIS_ENUM.POST_DELETE_CONGRESS)
       .then((res:ResponseModel) => {
@@ -82,6 +81,18 @@ export class CongresoService {
       })
       .catch(() => {
         reject("Error en la conexión");
+      })
+    })
+  }
+
+  fnGetCongressByCareer(idCareer) : Promise<any>{
+    return new Promise((resolve,reject) => {
+      this.apiCallService.fnGetPromise([idCareer], APIS_ENUM.GET_CONGRESS_BY_CAREER)
+      .then(res => {
+        resolve(res['congresos']);
+      })
+      .catch(err => {
+        reject(err);
       })
     })
   }

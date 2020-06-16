@@ -6,7 +6,7 @@ import { CongresoNuevoComponent } from './congreso-nuevo/congreso-nuevo.componen
 import { CongresoRootingComponent } from './congreso-rooting/congreso-rooting.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { routesCongreso } from './congreso.routing';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ModalModule } from 'ngb-modal';
@@ -21,7 +21,8 @@ import { ModalModule } from 'ngb-modal';
     RouterModule.forChild(routesCongreso),
     ReactiveFormsModule,
     NgxDatatableModule,
-    ModalModule
+    ModalModule,
+    FormsModule
   ]
 })
 export class CongresoModule { }
