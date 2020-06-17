@@ -5,6 +5,7 @@ import { CongresoService } from 'src/app/services/congreso.service';
 import { CareerService } from 'src/app/services/career.service';
 import { ToastrService } from 'ngx-toastr';
 import { Location } from '@angular/common';
+import { CongressModel } from 'src/app/models/congress.model';
 
 @Component({
   selector: 'app-congreso-nuevo',
@@ -15,7 +16,9 @@ export class CongresoNuevoComponent implements OnInit {
 
   newCongressForm = new FormGroup({
     nombre: new FormControl(null, [Validators.required]),
-    idCarrera: new FormControl(null, Validators.required)
+    idCarrera: new FormControl(null, Validators.required),
+    fechaInicio: new FormControl(null, Validators.required),
+    fechaFin: new FormControl(null, Validators.required)
   });
 
   arrayCareers: CareerModel[] = [];
@@ -63,7 +66,13 @@ export class CongresoNuevoComponent implements OnInit {
   }
 
   onSubmit(){
-    let data = this.newCongressForm.value;
+    let data: CongressModel = this.newCongressForm.value;
+    let fechainicio = new Date(data.fechaInicio);
+    let fechafin = new Date(data.fechaFin);
+    if(fechainicio >= fechafin){
+      this.toastr.error("La fecha inicio debe ser menor a fecha fin");
+      return;
+    }
     console.log(data);
     this.congressService.fnPostNewCongress(data)
     .then(res => {

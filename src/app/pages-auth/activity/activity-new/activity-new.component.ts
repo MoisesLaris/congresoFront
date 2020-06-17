@@ -7,6 +7,7 @@ import { DateModel } from 'src/app/models/date.model';
 import { AngularSectionComponent } from 'src/app/sections/angular-section/angular-section.component';
 import { ToastrService } from 'ngx-toastr';
 import { ActivityService } from 'src/app/services/activity.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-activity-new',
@@ -28,11 +29,13 @@ export class ActivityNewComponent implements OnInit {
   constructor(
     private congressService: CongresoService,
     private activityService: ActivityService,
+    private location: Location,
     private toasrt: ToastrService
   ) { }
 
   ngOnInit(): void {
     this.fnGetAllCongress();
+    this.initialiceDate();
   }
   
   fechaChange = true;
@@ -40,6 +43,15 @@ export class ActivityNewComponent implements OnInit {
   timeStart = {hour: 10, minute: 9};
   timeEnd = {hour: 11, minute: 9}
 
+  initialiceDate(){
+    let date = new Date();
+    
+     this.fecha = {
+      year: date.getFullYear(),
+      month: date.getMonth() + 1,
+      day: date.getDate()
+    };
+  }
   fnGetAllCongress(){
     this.congressService.fnGetAllCongress()
     .then((res:CongressModel[]) => {
@@ -148,6 +160,10 @@ export class ActivityNewComponent implements OnInit {
       this.toasrt.error(err);
     })
     
+  }
+
+  goBack(){
+    this.location.back();
   }
 
 }

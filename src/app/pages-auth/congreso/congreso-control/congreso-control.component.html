@@ -50,6 +50,22 @@
                             {{value}}
                         </ng-template>
                     </ngx-datatable-column>
+                    <ngx-datatable-column name="fechaInicio">
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            <span>Fecha Inicio</span>
+                        </ng-template>
+                        <ng-template ngx-datatable-cell-template let-value="value">
+                            {{value | date}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="fechaFin">
+                        <ng-template let-column="column" ngx-datatable-header-template>
+                            <span>Fecha Fin</span>
+                        </ng-template>
+                        <ng-template ngx-datatable-cell-template let-value="value">
+                            {{value | date}}
+                        </ng-template>
+                    </ngx-datatable-column>
                     <ngx-datatable-column name="id">
                         <ng-template let-column="column" ngx-datatable-header-template>
                             <span>Acciones</span>

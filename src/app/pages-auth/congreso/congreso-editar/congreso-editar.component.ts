@@ -22,14 +22,16 @@ export class CongresoEditarComponent implements OnInit {
 
   editCongressForm = new FormGroup({
     nombre: new FormControl(null, [Validators.required]),
-    idCarrera: new FormControl(null, Validators.required)
+    idCarrera: new FormControl(null, Validators.required),
+    fechaInicio: new FormControl(null, Validators.required),
+    fechaFin: new FormControl(null, Validators.required)
   });
   
   constructor(
     private route: ActivatedRoute,
     private congressService: CongresoService,
     private careerService: CareerService,
-    private toasr: ToastrService,
+    private toastr: ToastrService,
     private location: Location
   ) { }
 
@@ -56,14 +58,16 @@ export class CongresoEditarComponent implements OnInit {
       this.fnLoadData(res);
     })
     .catch((err)=>{
-      this.toasr.error(err);
+      this.toastr.error(err);
     })
   }
 
   fnLoadData(obj:CongressModel){
     this.editCongressForm.setValue({
       nombre: obj.nombre,
-      idCarrera: obj.idCarrera
+      idCarrera: obj.idCarrera,
+      fechaInicio: new Date(obj.fechaInicio).toISOString().substring(0,10),
+      fechaFin: new Date(obj.fechaFin).toISOString().substring(0,10)
     })
   }
 
@@ -71,15 +75,21 @@ export class CongresoEditarComponent implements OnInit {
     this.location.back();
   }
   onSubmit(){
-    let data = this.editCongressForm.value;
+    let data: CongressModel = this.editCongressForm.value;
+    let fechainicio = new Date(data.fechaInicio);
+    let fechafin = new Date(data.fechaFin);
+    if(fechainicio >= fechafin){
+      this.toastr.error("La fecha inicio debe ser menor a fecha fin");
+      return;
+    }
     
     this.congressService.fnPostEditCongress(this.idCongress,data)
     .then(res => {
-      this.toasr.success(res);
+      this.toastr.success(res);
       this.location.back();
     })
     .catch(err=> {
-      this.toasr.error(err);
+      this.toastr.error(err);
     })
   }
 

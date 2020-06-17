@@ -22,7 +22,9 @@ export class CongresoControlComponent implements OnInit {
 
   columns = [
     { prop: 'id' },
-    { name: 'nombre' }
+    { name: 'nombre' },
+    { name: 'fechaInicio'},
+    { name: 'fechaFin'}
   ];
 
   tableLoaded = true;
@@ -75,7 +77,7 @@ export class CongresoControlComponent implements OnInit {
   fnLoadTable(): void {
     let anyArray_data: any[] = [];
     this.recoveryArray_congress.forEach(obj => {
-      let any_transformObj = this.fnTransformObj(obj, ['nombre']);
+      let any_transformObj = this.fnTransformObj(obj, ['nombre','fechaInicio','fechaFin']);
       anyArray_data.push(any_transformObj);
     });
     this.temp = [...anyArray_data];
