@@ -16,7 +16,7 @@ export class UserNewComponent implements OnInit {
   newUserForm = new FormGroup({
     nombre: new FormControl(null, [Validators.required]),
     apellidos: new FormControl(null, [Validators.required]),
-    semestre: new FormControl(null, [Validators.required, Validators.maxLength(1)]),
+    semestre: new FormControl(null, [Validators.required]),
     grupo: new FormControl(null, [Validators.required,Validators.maxLength(1)]),
     correo: new FormControl(null, [Validators.required,Validators.email]),
     password: new FormControl(null, [Validators.required]),

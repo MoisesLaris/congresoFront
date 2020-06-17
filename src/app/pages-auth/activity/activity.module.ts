@@ -7,11 +7,16 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ModalModule } from 'ngb-modal';
 import { routesActivity } from './activity.routing';
+import { ActivityCalendarComponent } from './activity-calendar/activity-calendar.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { ActivityControlComponent } from './activity-control/activity-control.component';
+import { ActivityNewComponent } from './activity-new/activity-new.component';
 
 
 
 @NgModule({
-  declarations: [ActivityRoutingComponent],
+  declarations: [ActivityRoutingComponent, ActivityCalendarComponent, ActivityControlComponent, ActivityNewComponent],
   imports: [
     NgbModule,
     CommonModule,
@@ -19,7 +24,11 @@ import { routesActivity } from './activity.routing';
     ReactiveFormsModule,
     NgxDatatableModule,
     ModalModule,
-    FormsModule
+    FormsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    })
   ]
 })
 export class ActivityModule { }
