@@ -14,7 +14,8 @@ export const routesPagesAuth: Routes = [
         { path: 'congress', loadChildren: './congreso/congreso.module#CongresoModule'}, 
         { path: 'faq', loadChildren: './faq/faq.module#FaqModule'},
         { path: 'package', loadChildren: './pack/pack.module#PackModule'},
-        { path: 'activity', loadChildren: './activity/activity.module#ActivityModule'}
+        { path: 'activity', loadChildren: './activity/activity.module#ActivityModule'},
+        { path: 'assistance', loadChildren: './assistance/assistance.module#AssistanceModule'}
       ]
     }
   ]

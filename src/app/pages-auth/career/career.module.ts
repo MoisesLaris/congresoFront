@@ -18,7 +18,6 @@ import { routesCareer } from './career.routing';
   imports: [
     CommonModule,
     NgbModule,
-    CommonModule,
     RouterModule.forChild(routesCareer),
     ReactiveFormsModule,
     NgxDatatableModule,
