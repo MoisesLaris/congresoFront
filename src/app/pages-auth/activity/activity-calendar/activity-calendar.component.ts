@@ -3,6 +3,11 @@ import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMo
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView,} from 'angular-calendar';
+import { ActivityService } from 'src/app/services/activity.service';
+import { CongresoService } from 'src/app/services/congreso.service';
+import { CongressModel } from 'src/app/models/congress.model';
+import { ActivityModel } from 'src/app/models/activity.model';
+import { DateModel } from 'src/app/models/date.model';
 
 const colors: any = {
   red: {
@@ -27,11 +32,6 @@ const colors: any = {
 
 export class ActivityCalendarComponent implements OnInit {
    
-
-
-  ngOnInit(): void {
-  }
-
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;
@@ -118,9 +118,88 @@ export class ActivityCalendarComponent implements OnInit {
     },
   ];
 
+
+  activities: CalendarEvent[] = [];
+
+  constructor(
+    private modal: NgbModal,
+    private activityService: ActivityService,
+    private congressService: CongresoService
+  ) {}
+
+  arrayCongress: CongressModel[] = [];
+  arrayActivities: ActivityModel[] = [];
+  congressSelected = -1;
+
+  ngOnInit(): void {
+    this.fnGetAllCongress();
+  }
+
+
+  fnGetAllCongress(){
+    this.congressService.fnGetAllCongress()
+    .then(res => {
+      this.arrayCongress = res;
+    })
+    .catch(() => {});
+  }
+
+  fnGetActivityByCongress(){
+    this.activityService.fnGetActivityByCongress(this.congressSelected)
+    .then(res => {
+      this.arrayActivities = res;
+      this.fnLoadCalendar();
+    })
+  }
+
+
+
+  fnLoadCalendar(){
+    this.arrayActivities.forEach(obj => {
+      console.log(obj);
+      obj.fechas.forEach(fecha => {
+        let activity: CalendarEvent = {
+          title: obj.nombre + ' - ' +obj.descripcion,
+          color: {
+            primary: obj.color,
+            secondary: obj.color
+          },
+          start: this.fnGetDateFormat(true,fecha),
+          end : this.fnGetDateFormat(false,fecha)
+        };
+        console.log(activity);
+      
+        this.activities.push(activity);
+      });
+    });
+    this.refresh.next();
+  }
+  
+  fnGetDateFormat(start: boolean, fecha:DateModel): Date{
+    let year = fecha.fecha.year;
+    let month = fecha.fecha.month;
+    let day = fecha.fecha.day;
+    let hora;
+    let minuto;
+    if(start){
+      hora = fecha.horaInicio.hour;
+      minuto = fecha.horaInicio.minute;
+    }else{
+      hora = fecha.horaFin.hour;
+      minuto = fecha.horaFin.minute;
+    }
+    let date = year + '/' + month + '/' + day + ' ' + hora + ':' + minuto;
+    return new Date(date);
+  }
+
+  fnChangeCongress(){
+    this.activities = [];
+    this.fnGetActivityByCongress();
+  }
+  
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) {}
+  
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {

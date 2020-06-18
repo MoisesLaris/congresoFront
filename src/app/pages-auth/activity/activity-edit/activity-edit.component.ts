@@ -1,48 +1,55 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { CongressModel } from 'src/app/models/congress.model';
 import { CongresoService } from 'src/app/services/congreso.service';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import { DateModel } from 'src/app/models/date.model';
-import { AngularSectionComponent } from 'src/app/sections/angular-section/angular-section.component';
-import { ToastrService } from 'ngx-toastr';
 import { ActivityService } from 'src/app/services/activity.service';
+import { ToastrService } from 'ngx-toastr';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { ActivityModel } from 'src/app/models/activity.model';
+import { DateModel } from 'src/app/models/date.model';
 
 @Component({
-  selector: 'app-activity-new',
-  templateUrl: './activity-new.component.html',
+  selector: 'app-activity-edit',
+  templateUrl: './activity-edit.component.html',
   styles: []
 })
-export class ActivityNewComponent implements OnInit {
+export class ActivityEditComponent implements OnInit {
 
-  arrayDates: DateModel[] = [];
 
-  newActivityForm = new FormGroup({
+  editActivityForm = new FormGroup({
     idCongreso: new FormControl(null, [Validators.required]),
     nombre: new FormControl(null, [Validators.required]),
     descripcion: new FormControl(null, [Validators.required]),
   });
-  
+
   arrayCongress:CongressModel[] = [];
+  arrayDates: DateModel[] = [];
   fecha: NgbDateStruct;
   color = "#000000";
+  
   constructor(
     private congressService: CongresoService,
     private activityService: ActivityService,
     private location: Location,
-    private toasrt: ToastrService
+    private toasrt: ToastrService,
+    private route: ActivatedRoute,
   ) { }
 
-  ngOnInit(): void {
-    this.fnGetAllCongress();
-    this.initialiceDate();
-  }
-  
   fechaChange = true;
 
   timeStart = {hour: 10, minute: 9};
   timeEnd = {hour: 11, minute: 9}
+
+  idActivity;
+
+  ngOnInit(): void {
+    this.initialiceDate();
+    this.idActivity = this.route.snapshot.params.id;
+    this.fnGetActivityById();
+    this.fnGetAllCongress();
+  }
 
   initialiceDate(){
     let date = new Date();
@@ -53,19 +60,35 @@ export class ActivityNewComponent implements OnInit {
       day: date.getDate()
     };
   }
+
   fnGetAllCongress(){
     this.congressService.fnGetAllCongress()
-    .then((res:CongressModel[]) => {
+    .then(res => {
       this.arrayCongress = res;
-      this.newActivityForm.patchValue({
-        idCongreso: this.arrayCongress[0]._id
-      })
     })
-    .catch(err => {
-
-    });
+    .catch(() => {})
   }
 
+  fnGetActivityById(){
+    this.activityService.fnGetActivityById(this.idActivity)
+    .then((res: ActivityModel) => {
+      console.log(res);
+      if(!res.color){
+        this.color = "#000000";
+      }else{
+        this.color = res.color;
+      }
+      this.arrayDates = res.fechas;
+
+      this.editActivityForm.setValue({
+        idCongreso: res.idCongreso,
+        nombre: res.nombre,
+        descripcion: res.descripcion
+      })
+      
+    })
+    .catch(err => {})
+  }
 
   fnAddDate(){
     if(!this.fnCheckDates()){
@@ -102,6 +125,7 @@ export class ActivityNewComponent implements OnInit {
     this.arrayDates.push(obj);
   }
 
+
   fnCheckDates(): boolean{
     if(this.timeStart.hour < this.timeEnd.hour){
       return true;
@@ -121,38 +145,28 @@ export class ActivityNewComponent implements OnInit {
     this.arrayDates.splice(obj,1);
   }
 
-  onSubmit(){
 
+  goBack(){
+    this.location.back();
+  }
+
+  onSubmit(){
     if(this.arrayDates.length <= 0){
       this.toasrt.error("Se deben ingresar fechas");
       return;
     }
-    console.log(this.color);
-
-    let data = this.newActivityForm.value;
+    let data = this.editActivityForm.value;
     data.fechas = this.arrayDates;
     data.color = this.color;
-    
-    this.activityService.fnPostNewActivity(data)
+
+    this.activityService.fnPostEditActivity(this.idActivity,data)
     .then(res => {
       this.toasrt.success(res);
-      this.arrayDates = [];
-      this.newActivityForm.patchValue({
-        idCongreso: this.arrayCongress[0]._id
-      })
-      this.fecha = null;
-      this.timeStart = {hour: 10, minute: 9};
-      this.timeEnd = {hour: 11, minute: 9};
-      this.color = "#000000";
+      this.location.back();
     })
     .catch(err => {
       this.toasrt.error(err);
     })
-    
-  }
-
-  goBack(){
-    this.location.back();
   }
 
 }

@@ -12,7 +12,7 @@
                 </ul>
             </div>
             <div class="card-body">
-                <form role="form" novalidate [formGroup]="newActivityForm" class="row">
+                <form role="form" novalidate [formGroup]="editActivityForm" class="row">
                     <div class="form-group col-md-12 col-sm-12">
                         <label>Nombre</label>
                         <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
@@ -85,7 +85,7 @@
 
 
 
-                    <button type="button" class="btn btn-primary mx-auto" [disabled]="this.newActivityForm.invalid" (click)="onSubmit()">Guardar</button>
+                    <button type="button" class="btn btn-primary mx-auto" [disabled]="this.editActivityForm.invalid" (click)="onSubmit()">Guardar</button>
                 </div>
 
 

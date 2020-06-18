@@ -40,5 +40,9 @@ export enum APIS_ENUM {
     //ACTIVITY
     
     POST_NEW_ACTIVITY = '/api/newActividad',
+    GET_ACTIVITY_BY_CONGRESS = '/api/getActividades/idCongreso/?',
+    POST_DELETE_ACTIVITY = '/api/deleteActividad/?',
+    GET_ACTIVITY_BY_ID = '/api/getActividad/?',
+    POST_EDIT_ACTIVITY = '/api/updateActividad/?'
 
 }

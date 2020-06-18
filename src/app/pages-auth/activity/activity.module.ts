@@ -12,11 +12,12 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ActivityControlComponent } from './activity-control/activity-control.component';
 import { ActivityNewComponent } from './activity-new/activity-new.component';
+import { ActivityEditComponent } from './activity-edit/activity-edit.component';
 
 
 
 @NgModule({
-  declarations: [ActivityRoutingComponent, ActivityCalendarComponent, ActivityControlComponent, ActivityNewComponent],
+  declarations: [ActivityRoutingComponent, ActivityCalendarComponent, ActivityControlComponent, ActivityNewComponent, ActivityEditComponent],
   imports: [
     NgbModule,
     CommonModule,

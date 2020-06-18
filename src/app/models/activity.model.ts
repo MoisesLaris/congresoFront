@@ -4,6 +4,7 @@ export class ActivityModel{
     _id: string;
     idCongreso: string;
     nombre: string;
-    descripción: string;
+    descripcion: string;
+    color: any;
     fechas: DateModel[];
 }
