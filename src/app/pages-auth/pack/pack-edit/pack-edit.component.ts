@@ -55,6 +55,15 @@ export class PackEditComponent implements OnInit {
 
     })
   }
+  fnLoadData(obj:CongressModel){
+    this.editPackForm.setValue({
+      nombre: obj.nombre,
+      idCarrera: obj.idCarrera,
+      fechaInicio: new Date(obj.fechaInicio).toISOString().substring(0,10),
+      fechaFin: new Date(obj.fechaFin).toISOString().substring(0,10)
+    })
+  }
+
   numberOnly(event){
     const charCode = (event.which) ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -67,5 +76,16 @@ export class PackEditComponent implements OnInit {
   goBack(){
     this.location.back();
   }
-
+  onSubmit(){
+    let data = this.editPackForm.value;
+    
+    this.packageService.fnPostEditPackage(this.idEdit,data)
+    .then(res => {
+      this.toastr.success(res);
+      this.location.back();
+    })
+    .catch(err=> {
+      this.toastr.error(err);
+    })
+  }
 }
