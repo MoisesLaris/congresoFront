@@ -13,12 +13,24 @@ export class PackageService {
   ) { }
 
 
-  fnGetPackageById(id): Promise<any>{
+  fnGetAllPackage(): Promise<any>{
     return new Promise((resolve,reject) => {
-      this.apiCallService.fnPostWithParamsPromise({},[id],APIS_ENUM.POST_EDIT_PACKAGE)
+      this.apiCallService.fnGetPromise([],APIS_ENUM.GET_ALL_PACKAGE)
+      .then((res) => {
+        resolve(res['congresos']);
+      })
+      .catch(err =>{
+        reject();
+      }) 
+    })
+  }
+PostNewPackage(obj:any): Promise<any>{
+    return new Promise((resolve,reject)=>{
+      console.log(obj);
+      this.apiCallService.fnPostPromise(obj, APIS_ENUM.POST_NEW_PACKAGE)
       .then((res:ResponseModel) => {
         if(res.success){
-          resolve(res.success);
+          resolve(res.message);
         }else{
           reject(res.message);
         }
@@ -28,5 +40,49 @@ export class PackageService {
       })
     })
   }
+  
+  fnPostDeletePackage(id): Promise<any>{
+    return new Promise((resolve, reject) => {
+      this.apiCallService.fnPostWithParamsPromise({},[id],APIS_ENUM.POST_DELETE_PACKAGE)
+      .then((res:ResponseModel) => {
+        if(res.success){
+          resolve(res.message);
+        }else{
+          reject(res.message);
+        }
+      })
+      .catch(err => {
+        reject("Error en la conexión");
+      })
+    })
+  }
 
+  fnGetPackageById(id): Promise<any>{
+    return new Promise((resolve,reject) => {
+      this.apiCallService.fnGetPromise([id],APIS_ENUM.GET_PACKAGE_BY_ID)
+      .then(res => {
+        resolve(res['congreso']);
+      
+      })
+      .catch(() => {
+        reject("Error de conexión");
+      })
+    })
+  }
+
+  fnPostEditPackage(id, obj): Promise<any>{
+    return new Promise((resolve,reject) => {
+      this.apiCallService.fnPostWithParamsPromise(obj,[id],APIS_ENUM.POST_EDIT_PACKAGE)
+      .then((res:ResponseModel) => {
+        if(res.success){
+          resolve(res.message);
+        }else{
+          reject(res.message);
+        }
+      })
+      .catch(() => {
+        reject("Error en la conexión");
+      })
+    })
+  }
 }

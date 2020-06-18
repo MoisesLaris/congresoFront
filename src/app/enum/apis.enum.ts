@@ -34,7 +34,11 @@ export enum APIS_ENUM {
 
     //PACKAGE
 
-    POST_EDIT_PACKAGE = '/api/getTipoPago/?',
+    POST_EDIT_PACKAGE = '/api/updateTipoPago/?',
+    GET_ALL_PACKAGE = '/api/getTipoPagos',
+    GET_PACKAGE_BY_ID = '/api/getTipoPago/?',
+    POST_NEW_PACKAGE = '/api/newTipoPago',
+    POST_DELETE_PACKAGE = '/api/deleteTipoPago/?',
 
 
     //ACTIVITY

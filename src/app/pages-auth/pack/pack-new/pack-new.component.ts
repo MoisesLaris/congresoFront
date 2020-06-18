@@ -59,4 +59,19 @@ export class PackNewComponent implements OnInit {
   goBack(){
     this.location.back();
   }
+  onSubmit(){
+    let data = this.newPackForm.value;
+    console.log(data);
+    this.packageService.PostNewPackage(data)
+    .then(res => {
+      this.toastr.success(res);
+      this.newPackForm.reset();
+      this.newPackForm.patchValue({
+        idCarrera: this.arrayCongreso[0]._id
+      });
+    })
+    .catch(err => {
+      this.toastr.error(err);
+    })
+  }
 }

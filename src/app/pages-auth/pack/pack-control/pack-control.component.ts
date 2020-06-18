@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ModalManager } from 'ngb-modal';
 import { CongresoService } from 'src/app/services/congreso.service';
 import { PackageModel } from 'src/app/models/package.model';
+import { PackageService } from '../../../services/package.service';
 
 @Component({
   selector: 'app-pack-control',
@@ -41,6 +42,7 @@ export class PackControlComponent implements OnInit {
   constructor(
     private router: Router,
     private congressService: CongresoService,
+    private packageService: PackageService,
     private modalService: ModalManager,
     private toastr: ToastrService
   ) { }
@@ -104,20 +106,20 @@ export class PackControlComponent implements OnInit {
 
   fnEdit(id){
     console.log(id);
-    this.router.navigate(['/system/user/edit',id]);
+    this.router.navigate(['/system/pack/edit',id]);
   }
 
-  // fnDelete(){
-  //   console.log(this.empleadoEliminar);
-  //   this.congressService.fnPostDeleteUser(this.empleadoEliminar)
-  //   .then((res) => {
-  //     this.toastr.success(res);
-  //   })
-  //   .catch((err) => {
-  //     this.toastr.error(err);
-  //   });
-  //   this.modalService.close(this.modalRef);
-  // }
+   fnDelete(){
+     console.log(this.empleadoEliminar);
+     this.packageService.fnPostDeletePackage(this.empleadoEliminar)
+     .then((res) => {
+       this.toastr.success(res);
+     })
+     .catch((err) => {
+       this.toastr.error(err);
+     });
+     this.modalService.close(this.modalRef);
+   }
   
   empleadoEliminar;
 
