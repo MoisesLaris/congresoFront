@@ -14,8 +14,8 @@
             <div class="card-body">
                 <div class="row">
                     <div class="form-group col-md-12 col-sm-12">
-                        <select class="form-control" [(ngModel)]="congresoSelected">
-                            <option value="-1" disabled>Seleccioné un congreso</option>
+                        <select class="form-control" [(ngModel)]="congresoSelected" (change)="fnChangeCongress()">
+                            <option value="-1" disabled>Seleccioné carrera</option>
                             <option *ngFor="let congreso of recoveryArray_congress" [value]="congreso._id">{{congreso.nombre}}</option>
                         </select>
 
@@ -52,17 +52,17 @@
                             {{value}}
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="apellidos">
+                    <ngx-datatable-column name="descripcion">
                         <ng-template let-column="column" ngx-datatable-header-template>
-                            <span>Apellidos</span>
+                            <span>Descripcion</span>
                         </ng-template>
                         <ng-template ngx-datatable-cell-template let-value="value">
                             {{value}}
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="correo">
+                    <ngx-datatable-column name="precio">
                         <ng-template let-column="column" ngx-datatable-header-template>
-                            <span>Correo</span>
+                            <span>Precio</span>
                         </ng-template>
                         <ng-template ngx-datatable-cell-template let-value="value">
                             {{value}}
@@ -74,10 +74,10 @@
                         </ng-template>
                         <ng-template ngx-datatable-cell-template let-value="value">
                             <ng-container>
-                                <a href="javascript:void(0)" class="table-icon-button mx-1" (click)="fnEdit(value)" placement="bottom" ngbTooltip="Editar usuario">
+                                <a href="javascript:void(0)" class="table-icon-button mx-1" (click)="fnEdit(value)" placement="bottom" ngbTooltip="Editar Paquete">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                                <a href="javascript:void(0)" class="table-icon-button mx-1" (click)="openModal(value)" placement="bottom" ngbTooltip="Eliminar usuario">
+                                <a href="javascript:void(0)" class="table-icon-button mx-1" (click)="openModal(value)" placement="bottom" ngbTooltip="Eliminar paquete">
                                     <i class="fa fa-trash text-danger"></i>
                                 </a>
                             </ng-container>
@@ -105,6 +105,6 @@
     </modal-content>
     <modal-footer>
         <button class="btn btn-primary btn-outline-primary" (click)="closeModal()">No</button>
-
+        <button class="btn btn-primary btn-outline-danger" (click)="fnDelete()">Sí</button>
     </modal-footer>
 </modal>

@@ -23,10 +23,10 @@ export class PackControlComponent implements OnInit {
   selected = [];
 
   columns = [
-    { prop: 'nombre' },
-    { name: 'apellidos' },
-    { name: 'correo' },
-    { name: 'id' }
+    { prop: 'id' },
+    { name: 'nombre' },
+    { name: 'descripcion' },
+    { name: 'precio' }
   ];
 
   tableLoaded = true;
@@ -56,15 +56,27 @@ export class PackControlComponent implements OnInit {
     .then(res => {
       this.recoveryArray_congress = res;
     })
-    .catch(() => {
+    .catch(()=>{});
+  }
 
+  fnGetAllPackageByCongress(){
+    this.tableLoaded = false;
+    console.log(this.congresoSelected);
+    this.packageService.fnGetPackageByCongress(this.congresoSelected)
+    .then((res)=>{
+      this.recoveryArray_package = res;
+      console.log(res);
+      this.fnLoadTable();
+    })
+    .catch((rej)=>{
+      console.log(rej);    
     });
   }
 
   fnLoadTable(): void {
     let anyArray_data: any[] = [];
     this.recoveryArray_package.forEach(obj => {
-      let any_transformObj = this.fnTransformObj(obj, ['nombre', 'apellidos','correo']);
+      let any_transformObj = this.fnTransformObj(obj, ['nombre','descripcion','precio']);
       anyArray_data.push(any_transformObj);
     });
     this.temp = [...anyArray_data];
@@ -105,26 +117,26 @@ export class PackControlComponent implements OnInit {
   }
 
   fnEdit(id){
-    console.log(id);
-    this.router.navigate(['/system/pack/edit',id]);
+    this.router.navigate(['/system/package/edit',id]);
   }
 
-   fnDelete(){
-     console.log(this.empleadoEliminar);
-     this.packageService.fnPostDeletePackage(this.empleadoEliminar)
-     .then((res) => {
-       this.toastr.success(res);
-     })
-     .catch((err) => {
-       this.toastr.error(err);
-     });
-     this.modalService.close(this.modalRef);
-   }
+  fnDelete(){
+    console.log(this.idEliminar);
+    this.packageService.fnPostDeletePackage(this.idEliminar)
+    .then((res) => {
+      this.toastr.success(res);
+      this.fnGetAllPackageByCongress();
+    })
+    .catch((err) => {
+      this.toastr.error(err);
+    });
+    this.modalService.close(this.modalRef);
+  }
   
-  empleadoEliminar;
+  idEliminar;
 
   openModal(id){
-    this.empleadoEliminar = id;
+    this.idEliminar = id;
     this.modalRef = this.modalService.open(this.myModal, {
         size: "md",
         modalClass: 'mymodal',
@@ -140,6 +152,10 @@ export class PackControlComponent implements OnInit {
 closeModal(){
     this.modalService.close(this.modalRef);
     //or this.modalRef.close();
+}
+
+fnChangeCongress(){
+  this.fnGetAllPackageByCongress();
 }
 
 }

@@ -12,7 +12,7 @@
                 </ul>
             </div>
             <div class="card-body">
-                <form role="form" novalidate [formGroup]="editPackForm" class="row">
+                <form role="form" novalidate [formGroup]="editPackageForm" class="row">
                     <div class="form-group col-md-12 col-sm-12">
                         <label>Nombre</label>
                         <input type="text" class="form-control" placeholder="Nombre" formControlName="nombre">
@@ -23,19 +23,19 @@
                     </div>
                     <div class="form-group col-md-12 col-sm-12">
                         <label>Precio</label>
-                        <input type="number" class="form-control" placeholder="Semestre/Cuatrimestre" formControlName="precio" (keypress)="numberOnly($event)">
+                        <input type="number" class="form-control" placeholder="Precio" formControlName="precio">
                     </div>
 
                     <div class="form-group col-md-12 col-sm-12">
                         <label>Congreso</label>
                         <select class="form-control" formControlName="idCongreso">
-                            <option *ngFor="let congreso of arrayCongreso" [value]="congreso._id">{{congreso.nombre}}</option>
+                            <option *ngFor="let congreso of arrayCongress" [value]="congreso._id">{{congreso.nombre}}</option>
                         </select>
 
                     </div>
 
 
-                    <button type="button" class="btn btn-primary mx-auto" [disabled]="this.editPackForm.invalid" (click)="onSubmit()">Guardar</button>
+                    <button type="button" class="btn btn-primary mx-auto" [disabled]="this.editPackageForm.invalid" (click)="onSubmit()">Guardar</button>
                 </form>
             </div>
         </div>

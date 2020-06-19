@@ -17,6 +17,7 @@ export class PackageService {
     return new Promise((resolve,reject) => {
       this.apiCallService.fnGetPromise([],APIS_ENUM.GET_ALL_PACKAGE)
       .then((res) => {
+        console.log(res);
         resolve(res['congresos']);
       })
       .catch(err =>{
@@ -61,14 +62,14 @@ PostNewPackage(obj:any): Promise<any>{
     return new Promise((resolve,reject) => {
       this.apiCallService.fnGetPromise([id],APIS_ENUM.GET_PACKAGE_BY_ID)
       .then(res => {
-        resolve(res['congreso']);
-      
+        resolve(res['tipoPago'])
       })
       .catch(() => {
         reject("Error de conexión");
       })
     })
   }
+
 
   fnPostEditPackage(id, obj): Promise<any>{
     return new Promise((resolve,reject) => {
@@ -82,6 +83,18 @@ PostNewPackage(obj:any): Promise<any>{
       })
       .catch(() => {
         reject("Error en la conexión");
+      })
+    })
+  }
+  fnGetPackageByCongress(idCongress) : Promise<any>{
+    return new Promise((resolve,reject) => {
+      this.apiCallService.fnGetPromise([idCongress], APIS_ENUM.GET_PACKAGE_BY_CONGRESS)
+      .then(res => {
+        console.log(res);
+        resolve(res['tipoPagos']);
+      })
+      .catch(err => {
+        reject("Error de conexion");
       })
     })
   }

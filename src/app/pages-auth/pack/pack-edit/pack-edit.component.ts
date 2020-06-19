@@ -5,6 +5,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CongressModel } from 'src/app/models/congress.model';
 import { PackageService } from 'src/app/services/package.service';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
+import { PackageModel } from '../../../models/package.model';
 
 @Component({
   selector: 'app-pack-edit',
@@ -13,73 +15,70 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class PackEditComponent implements OnInit {
 
-  editPackForm = new FormGroup({
-    nombre: new FormControl(null, Validators.required),
-    descripcion: new FormControl(null, Validators.required),
-    precio: new FormControl(null, Validators.required),
+  idPackage;
+  arrayCongress: CongressModel[] = [];
+
+
+  editPackageForm = new FormGroup({
+    nombre: new FormControl(null, [Validators.required]),
     idCongreso: new FormControl(null, Validators.required),
+    descripcion: new FormControl(null, Validators.required),
+    precio: new FormControl(null, Validators.required)
   });
-
-  arrayCongreso:CongressModel[] = [];
-
-  idEdit;
-
+  
   constructor(
-    private location: Location,
-    private congressService: CongresoService,
+    private route: ActivatedRoute,
     private packageService: PackageService,
-    private toastr: ToastrService
+    private congressService: CongresoService,
+    private toastr: ToastrService,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
-    this.fnGetAllCongress();
+    this.idPackage = this.route.snapshot.params.id;
     this.fnGetPackageById();
+    this.fnGetAllCongress();
   }
 
-  fnGetPackageById() {
-    this.packageService.fnGetPackageById(this.idEdit)
+
+  fnGetAllCongress(){
+    this.congressService.fnGetAllCongress()
     .then(res => {
-      this.toastr.success(res);
+      this.arrayCongress = res;
     })
     .catch(err => {
+    })
+  }
+  fnGetPackageById(){
+    console.log(this.idPackage);
+    this.packageService.fnGetPackageById(this.idPackage)
+    .then((res:PackageModel) => {
+      console.log(res);
+      this.fnLoadData(res);
+    })
+    .catch((err)=>{
       this.toastr.error(err);
     })
   }
 
-  fnGetAllCongress() {
-    this.congressService.fnGetAllCongress()
-    .then(res => {
-      this.arrayCongreso = res;
-    })
-    .catch(() => {
-
-    })
-  }
-  fnLoadData(obj:CongressModel){
-    this.editPackForm.setValue({
+  fnLoadData(obj:PackageModel){
+    this.editPackageForm.setValue({
       nombre: obj.nombre,
-      idCarrera: obj.idCarrera,
-      fechaInicio: new Date(obj.fechaInicio).toISOString().substring(0,10),
-      fechaFin: new Date(obj.fechaFin).toISOString().substring(0,10)
+      idCongreso: obj.idCongreso,
+      descripcion: obj.descripcion,
+      precio: obj.precio
+
     })
   }
 
-  numberOnly(event){
-    const charCode = (event.which) ? event.which : event.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-      return false;
-    }
-    return true;
-  }
-
-
+  
   goBack(){
     this.location.back();
   }
   onSubmit(){
-    let data = this.editPackForm.value;
+    let data = this.editPackageForm.value;
     
-    this.packageService.fnPostEditPackage(this.idEdit,data)
+    this.packageService.fnPostEditPackage(this.idPackage,data)
     .then(res => {
       this.toastr.success(res);
       this.location.back();
