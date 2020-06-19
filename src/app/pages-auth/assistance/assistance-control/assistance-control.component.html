@@ -1,4 +1,4 @@
-<h2 class="display-3 text-center mt-5">Control asistencia</h2>
+<h2 class="display-3 text-center mt-5">Asistencia</h2>
 <div class="row">
     <div class="col-12">
 
@@ -6,29 +6,13 @@
             <div class="card-header">
                 <ul class="nav nav-pills card-header-pills">
                     <li class="nav-item">
-                        <a class="btn btn-primary btn-sm" [routerLink]="['/system/congress/new']" href="javascript:void(0)"> <i class="fas fa-plus"></i> Nuevo congreso</a>
+                        <a class="btn btn-primary btn-sm" (click)="goBack()" href="javascript:void(0)"> <i class="fas fa-arrow-left"></i> Regresar</a>
                     </li>
 
                 </ul>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="form-group col-md-6 col-sm-12">
-                        <label>Congreso</label>
-                        <select class="form-control" [(ngModel)]="congressSelected" (change)="fnChangeCongress()">
-                            <option value="-1" disabled>Seleccioné congreso</option>
-                            <option *ngFor="let congreso of arrayCongress" [value]="congreso._id">{{congreso.nombre}}</option>
-                        </select>
-                    </div>
 
-                    <div class="form-group col-md-6 col-sm-12">
-                        <label>Actividades</label>
-                        <select class="form-control" [(ngModel)]="congressSelected" (change)="fnChangeCongress()">
-                            <option value="-1" disabled>Seleccioné congreso</option>
-                            <option *ngFor="let congreso of arrayCongress" [value]="congreso._id">{{congreso.nombre}}</option>
-                        </select>
-                    </div>
-                </div>
                 <div class="input-group input-group-sm my-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fa fa-search"></i></span>
@@ -41,7 +25,7 @@
                         <i class="fa fa-spinner fa-4x fa-spin "></i>
                     </div>
                     <div class="col-12" style="margin-top: 20px;">
-                        Cargando congresos...
+                        Cargando asistencias...
                     </div>
                 </div>
 
@@ -57,20 +41,28 @@
                             {{value}}
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="fechaInicio">
+                    <ngx-datatable-column name="apellidos">
                         <ng-template let-column="column" ngx-datatable-header-template>
-                            <span>Fecha Inicio</span>
+                            <span>Apellidos</span>
                         </ng-template>
                         <ng-template ngx-datatable-cell-template let-value="value">
-                            {{value | date}}
+                            {{value}}
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="fechaFin">
+                    <ngx-datatable-column name="correo">
                         <ng-template let-column="column" ngx-datatable-header-template>
-                            <span>Fecha Fin</span>
+                            <span>Correo</span>
                         </ng-template>
                         <ng-template ngx-datatable-cell-template let-value="value">
-                            {{value | date}}
+                            {{value}}
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column>
+                        <ng-template ngx-datatable-header-template>
+                            <span>Sem / Grupo</span>
+                        </ng-template>
+                        <ng-template ngx-datatable-cell-template let-row="row">
+                            {{row.semestre}}º {{row.grupo}}
                         </ng-template>
                     </ngx-datatable-column>
                     <ngx-datatable-column name="id">
@@ -79,12 +71,16 @@
                         </ng-template>
                         <ng-template ngx-datatable-cell-template let-value="value">
                             <ng-container>
-                                <a href="javascript:void(0)" class="table-icon-button mx-1" (click)="fnEdit(value)" placement="bottom" ngbTooltip="Editar congreso">
-                                    <i class="fa fa-pencil"></i>
+                                <a *ngIf="checkList[value].check == 0" href="javascript:void(0)" class="btn btn-sm btn-primary" (click)="fnCheckList(value)">
+                                    Asistencia
                                 </a>
-                                <a href="javascript:void(0)" class="table-icon-button mx-1" (click)="openModal(value)" placement="bottom" ngbTooltip="Eliminar congreso">
-                                    <i class="fa fa-trash text-danger"></i>
+                                <a *ngIf="checkList[value].check == 1" href="javascript:void(0)" class="btn btn-sm btn-primary" disabled>
+                                    <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
                                 </a>
+                                <a *ngIf="checkList[value].check == 2" href="javascript:void(0)" class="btn btn-sm btn-success" disabled>
+                                    <i class="fa fa-check-circle" aria-hidden="true"></i> Asistencia
+                                </a>
+
                             </ng-container>
 
                         </ng-template>
@@ -100,16 +96,3 @@
     </div>
 
 </div>
-
-<modal #myModal>
-    <modal-header>
-        Eliminar Congreso
-    </modal-header>
-    <modal-content>
-        ¿Está seguro de que quiere eliminar a este congreso?
-    </modal-content>
-    <modal-footer>
-        <button class="btn btn-primary btn-outline-primary" (click)="closeModal()">No</button>
-        <button class="btn btn-primary btn-outline-danger" (click)="fnDelete()">Sí</button>
-    </modal-footer>
-</modal>

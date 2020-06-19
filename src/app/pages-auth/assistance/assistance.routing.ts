@@ -9,7 +9,7 @@ export const routesAsistance: Routes = [
       component: AssistanceRoutingComponent,
       children: [
         { path: '', redirectTo: 'control', pathMatch: 'full' },
-        { path: 'control', component: AssistanceControlComponent },
+        { path: 'control/:congreso/:actividad', component: AssistanceControlComponent },
         // { path: 'new', component: CareerNewComponent},
         // { path: 'edit/:id', component: CareerEditComponent}
         

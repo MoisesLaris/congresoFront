@@ -4,6 +4,7 @@ import { ActivityCalendarComponent } from "./activity-calendar/activity-calendar
 import { ActivityNewComponent } from "./activity-new/activity-new.component";
 import { ActivityControlComponent } from "./activity-control/activity-control.component";
 import { ActivityEditComponent } from "./activity-edit/activity-edit.component";
+import { ActivityCalendarAdminComponent } from "./activity-calendar-admin/activity-calendar-admin.component";
 
 export const routesActivity: Routes = [
     {
@@ -14,8 +15,8 @@ export const routesActivity: Routes = [
         { path: 'control', component: ActivityControlComponent },
         { path: 'new', component: ActivityNewComponent},
         { path: 'edit/:id', component: ActivityEditComponent},
-        { path: 'calendar', component: ActivityCalendarComponent}
-        
+        { path: 'calendar', component: ActivityCalendarComponent},
+        { path: 'calendar-admin', component: ActivityCalendarAdminComponent},        
       ]
     }
   ]

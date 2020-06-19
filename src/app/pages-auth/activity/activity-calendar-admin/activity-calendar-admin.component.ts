@@ -1,22 +1,22 @@
-import { Component, OnInit,ChangeDetectionStrategy,ViewChild,TemplateRef, } from '@angular/core';
-import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours,} from 'date-fns';
+import { Component, OnInit,ViewChild,TemplateRef, } from '@angular/core';
+import { isSameDay, isSameMonth, addHours,} from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView,} from 'angular-calendar';
+import { CalendarEvent, CalendarEventAction, CalendarView, CalendarEventTimesChangedEvent,} from 'angular-calendar';
 import { ActivityService } from 'src/app/services/activity.service';
 import { CongresoService } from 'src/app/services/congreso.service';
 import { CongressModel } from 'src/app/models/congress.model';
 import { ActivityModel } from 'src/app/models/activity.model';
 import { DateModel } from 'src/app/models/date.model';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-activity-calendar',
-  templateUrl: './activity-calendar.component.html',
-  styles: []
+  selector: 'app-activity-calendar-admin',
+  templateUrl: './activity-calendar-admin.component.html',
+  styleUrls: ['./activity-calendar-admin.component.css']
 })
+export class ActivityCalendarAdminComponent implements OnInit {
 
-export class ActivityCalendarComponent implements OnInit {
-   
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;
@@ -32,10 +32,11 @@ export class ActivityCalendarComponent implements OnInit {
 
   actions: CalendarEventAction[] = [
     {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
+      label: '<i class="fa fa-calendar-check-o"></i>',
       a11yLabel: 'Edit',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
+        console.log(event);
+        this.router.navigate(['/system/assistance/control',this.congressSelected,event.id]);
       },
     },
     
@@ -50,7 +51,8 @@ export class ActivityCalendarComponent implements OnInit {
   constructor(
     private modal: NgbModal,
     private activityService: ActivityService,
-    private congressService: CongresoService
+    private congressService: CongresoService,
+    private router: Router
   ) {}
 
   arrayCongress: CongressModel[] = [];
@@ -86,6 +88,7 @@ export class ActivityCalendarComponent implements OnInit {
       obj.fechas.forEach(fecha => {
 
         let activity: CalendarEvent = {
+          id: obj._id,
           title: obj.nombre + ' - ' +obj.descripcion,
           color: {
             primary: obj.color,
@@ -93,6 +96,7 @@ export class ActivityCalendarComponent implements OnInit {
           },
           start: this.fnGetDateFormat(true,fecha),
           end : this.fnGetDateFormat(false,fecha),
+          actions:this.actions
         };
 
 
@@ -163,6 +167,7 @@ export class ActivityCalendarComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
+    console.log(event);
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
   }
