@@ -54,4 +54,7 @@ export enum APIS_ENUM {
     //ASSISTANCE
 
     POST_NEW_ASSITANCE = '/api/newActividadUF'
+
+
+    //PAYMENT
 }
