@@ -7,11 +7,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HomeSystemComponent } from './home-system/home-system.component';
 import { NavbarComponent } from '../shared/navbar/navbar.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FooterComponent } from '../shared/footer/footer.component';
 
 
 
 @NgModule({
-  declarations: [PagesAuthRoutingComponent, HomeSystemComponent, NavbarComponent,],
+  declarations: [PagesAuthRoutingComponent, HomeSystemComponent, NavbarComponent, FooterComponent],
   imports: [
     NgbModule,
     CommonModule,
