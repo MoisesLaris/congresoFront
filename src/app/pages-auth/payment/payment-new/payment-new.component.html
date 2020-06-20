@@ -1,1 +1,56 @@
-<p>payment-new works!</p>
+<h2 class="display-3 text-center mt-5">
+    Nuevo Pago</h2>
+<div class="row">
+    <div class="col-12">
+        <div class="card my-4">
+            <div class="card-header">
+                <ul class="nav nav-pills card-header-pills">
+                    <li class="nav-item">
+                        <a class="btn btn-primary btn-sm" (click)="goBack()" href="javascript:void(0)"> <i class="fas fa-arrow-left"></i> Regresar</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="form-group col-md-6 col-sm-12">
+                        <label>Congreso</label>
+                        <select class="form-control" (change)="fnChangeCongress()" [(ngModel)]="congresoSelected">
+                            <option value="-1" disabled>Seleccione congreso</option>
+                            <option *ngFor="let congreso of recoveryArray_congress" [value]="congreso._id">{{congreso.nombre}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6 col-sm-12">
+                        <label>Paquete</label>
+                        <select class="form-control" (change)="fnChangePackage()" [(ngModel)]="packageSelected">
+                            <option value="-1" disabled>Seleccione paguete</option>
+                            <option *ngFor="let paquete of recoveryArray_package" [value]="paquete._id">{{paquete.nombre}} - {{paquete.precio | currency}}</option>
+                        </select>
+                    </div>
+                </div>
+                <form role="form" novalidate [formGroup]="newPaymentForm" class="row">
+
+                    <div class="form-group col-md-12 col-sm-12">
+                        <label>Usuario</label>
+                        <select class="form-control" formControlName="idUsuario">
+                            <option *ngFor="let usuario of recoveryArray_users" [value]="usuario._id">{{usuario.nombre}} {{usuario.apellidos}} - {{usuario.correo}} - {{usuario.semestre}}º{{usuario.grupo}}</option>
+                        </select>
+
+                    </div>
+
+                    <div class="form-group col-md-12 col-sm-12" *ngIf="enableInput">
+                        <label>Monto a pagar</label>
+                        <input type="text" class="form-control" placeholder="Monto a pagar" formControlName="cantidad" (keypress)="numberOnly($event)">
+                    </div>
+
+
+
+
+
+                    <button type="button" class="btn btn-primary mx-auto" [disabled]="this.newPaymentForm.invalid" (click)="onSubmit()">Guardar</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

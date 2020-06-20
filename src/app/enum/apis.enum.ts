@@ -53,8 +53,12 @@ export enum APIS_ENUM {
 
     //ASSISTANCE
 
-    POST_NEW_ASSITANCE = '/api/newActividadUF'
+    POST_NEW_ASSITANCE = '/api/newActividadUF',
 
 
     //PAYMENT
+    GET_PAYMENT_BY_PACKAGE = '/api/getPagos/idTipoPago/?',
+    POST_NEW_PAYMENT = '/api/newPago',
+    GET_PAYMENT_BY_ID = '/api/getPagos/?',
+    POST_EDIT_PAYMENT = '/api/updatePagos/?'
 }

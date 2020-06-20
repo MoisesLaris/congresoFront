@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { FaqService } from 'src/app/services/faq.service';
 import { CongressModel } from 'src/app/models/congress.model';
 import { CongresoService } from 'src/app/services/congreso.service';
+import { Subscription } from 'rxjs';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-faq-control',
@@ -41,12 +43,28 @@ export class FaqControlComponent implements OnInit {
     private faqService: FaqService,
     private modalService: ModalManager,
     private congressService: CongresoService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private sessionService: SessionService
   ) { }
+
+  userSubscription: Subscription;
+  user;
 
   ngOnInit(): void {
     this.fnGetAllCongress();
+    this.subscribeToUser();
   }
+
+  subscribeToUser(){
+    this.sessionService._permissions.subscribe(
+      data => {
+        console.log(data);
+        this.user = data;
+      }
+    )
+  }
+
+
   fnGetAllCongress(){
     this.congressService.fnGetAllCongress()
     .then(res => {

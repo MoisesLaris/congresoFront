@@ -59,7 +59,7 @@
                             {{value}}
                         </ng-template>
                     </ngx-datatable-column>
-                    <ngx-datatable-column name="id">
+                    <ngx-datatable-column name="id" *ngIf="this.user.tipoUsuario == 0">
                         <ng-template let-column="column" ngx-datatable-header-template>
                             <span>Acciones</span>
                         </ng-template>

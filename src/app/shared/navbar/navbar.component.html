@@ -1,6 +1,6 @@
 <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom headroom--top headroom--pinned">
     <div class="container">
-        <a class="navbar-brand mr-lg-5" [routerLink]="['/home']">
+        <a class="navbar-brand mr-lg-5" [routerLink]="['/system/home']">
             <img src="./assets/img/congreso.png" style="height: 70px;">
         </a>
         <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
@@ -10,7 +10,7 @@
             <div class="navbar-collapse-header">
                 <div class="row">
                     <div class="col-6 collapse-brand">
-                        <a [routerLink]="['/home']">
+                        <a [routerLink]="['/system/home']">
                             <img src="./assets/img/congreso.png">
                         </a>
                     </div>
@@ -23,28 +23,28 @@
                 </div>
             </div>
             <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" *ngIf="tipoUsuario==0">
                     <a class="nav-link no-caret" data-toggle="dropdown" role="button" [routerLink]="['/system/user/control']">
                         <i class="ni ni-ui-04 d-lg-none"></i>
                         <span class="nav-link-inner--text">Usuarios</span>
                     </a>
 
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" *ngIf="tipoUsuario==0">
                     <a class="nav-link no-caret" data-toggle="dropdown" role="button" [routerLink]="['/system/career/control']">
                         <i class="ni ni-ui-04 d-lg-none"></i>
                         <span class="nav-link-inner--text">Carreras</span>
                     </a>
 
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" *ngIf="tipoUsuario==0">
                     <a class="nav-link no-caret" data-toggle="dropdown" role="button" [routerLink]="['/system/congress/control']">
                         <i class="ni ni-ui-04 d-lg-none"></i>
                         <span class="nav-link-inner--text">Congresos</span>
                     </a>
 
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" *ngIf="tipoUsuario==0">
                     <a class="nav-link no-caret" data-toggle="dropdown" role="button" [routerLink]="['/system/activity/control']">
                         <i class="ni ni-ui-04 d-lg-none"></i>
                         <span class="nav-link-inner--text">Actividades</span>
@@ -65,12 +65,25 @@
                     </a>
 
                 </li> -->
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" *ngIf="tipoUsuario==0">
                     <a class="nav-link no-caret" data-toggle="dropdown" role="button" [routerLink]="['/system/package/control']">
                         <i class="ni ni-ui-04 d-lg-none"></i>
                         <span class="nav-link-inner--text">Paquetes</span>
                     </a>
 
+                </li>
+                <li class="nav-item dropdown" *ngIf="tipoUsuario==0">
+                    <a class="nav-link no-caret" data-toggle="dropdown" role="button" [routerLink]="['/system/payment/control']">
+                        <i class="ni ni-ui-04 d-lg-none"></i>
+                        <span class="nav-link-inner--text">Pagos</span>
+                    </a>
+
+                </li>
+                <li class="nav-item dropdown" *ngIf="tipoUsuario==1">
+                    <a class="nav-link no-caret" data-toggle="dropdown" role="button" [routerLink]="['/system/activity/calendar']">
+                        <i class="ni ni-ui-04 d-lg-none"></i>
+                        <span class="nav-link-inner--text">Calendario</span>
+                    </a>
                 </li>
 
             </ul>

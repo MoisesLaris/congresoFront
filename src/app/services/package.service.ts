@@ -18,7 +18,7 @@ export class PackageService {
       this.apiCallService.fnGetPromise([],APIS_ENUM.GET_ALL_PACKAGE)
       .then((res) => {
         console.log(res);
-        resolve(res['congresos']);
+        resolve(res['tipoPagos']);
       })
       .catch(err =>{
         reject();

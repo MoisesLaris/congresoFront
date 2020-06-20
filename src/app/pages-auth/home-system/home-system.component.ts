@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionService } from 'src/app/services/session.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home-system',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeSystemComponent implements OnInit {
 
-  constructor() { }
+  user: Subscription;
+  userData;
+    
+  constructor(
+    private sessionService: SessionService
+  ) { }
 
   ngOnInit(): void {
+    this.fnSubscribeUser();
+  }
+
+  ngOnDestroy(): void {
+    if(this.user){
+      this.user.unsubscribe();
+    }
+    
+  }
+
+  fnSubscribeUser(){
+    this.user = this.sessionService._permissions.subscribe(data => {
+      console.log(data);
+      this.userData = data.user;
+    })
   }
 
 }

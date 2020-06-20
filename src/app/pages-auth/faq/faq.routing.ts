@@ -3,6 +3,7 @@ import { FaqRoutingComponent } from "./faq-routing/faq-routing.component";
 import { FaqControlComponent } from "./faq-control/faq-control.component";
 import { FaqNewComponent } from "./faq-new/faq-new.component";
 import { FaqEditComponent } from "./faq-edit/faq-edit.component";
+import { PagesGuard } from "src/app/guard/pages.guard";
 
 
 export const routesFaq: Routes = [
@@ -13,7 +14,7 @@ export const routesFaq: Routes = [
         { path: '', redirectTo: 'control', pathMatch: 'full' },
         { path: 'control', component: FaqControlComponent },
         { path: 'new', component: FaqNewComponent},
-        { path: 'edit/:id', component: FaqEditComponent}
+        { path: 'edit/:id',canActivate: [PagesGuard], component: FaqEditComponent}
         
       ]
     }
