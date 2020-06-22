@@ -10,11 +10,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ModalModule } from 'ngb-modal';
 import { routesFaq } from './faq.routing';
+import { FaqNewUserComponent } from './faq-new-user/faq-new-user.component';
 
 
 
 @NgModule({
-  declarations: [FaqControlComponent, FaqEditComponent, FaqRoutingComponent, FaqNewComponent],
+  declarations: [FaqControlComponent, FaqEditComponent, FaqRoutingComponent, FaqNewComponent, FaqNewUserComponent],
   imports: [
     NgbModule,
     CommonModule,

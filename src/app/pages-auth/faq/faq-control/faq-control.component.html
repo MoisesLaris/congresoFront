@@ -6,7 +6,8 @@
             <div class="card-header">
                 <ul class="nav nav-pills card-header-pills">
                     <li class="nav-item">
-                        <a class="btn btn-primary btn-sm" [routerLink]="['/system/faq/new']" href="javascript:void(0)"> <i class="fas fa-plus"></i> Nueva Pregunta</a>
+                        <a *ngIf="this.user.tipoUsuario == 0" class="btn btn-primary btn-sm" [routerLink]="['/system/faq/new']" href="javascript:void(0)"> <i class="fas fa-plus"></i> Nueva Pregunta</a>
+                        <a *ngIf="this.user.tipoUsuario == 1" class="btn btn-primary btn-sm" [routerLink]="['/system/faq/new-user']" href="javascript:void(0)"> <i class="fas fa-plus"></i> Nueva Pregunta</a>
                     </li>
 
                 </ul>
