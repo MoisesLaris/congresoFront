@@ -14,11 +14,12 @@ import { ActivityControlComponent } from './activity-control/activity-control.co
 import { ActivityNewComponent } from './activity-new/activity-new.component';
 import { ActivityEditComponent } from './activity-edit/activity-edit.component';
 import { ActivityCalendarAdminComponent } from './activity-calendar-admin/activity-calendar-admin.component';
+import { ActivityAssistanceComponent } from './activity-assistance/activity-assistance.component';
 
 
 
 @NgModule({
-  declarations: [ActivityRoutingComponent, ActivityCalendarComponent, ActivityControlComponent, ActivityNewComponent, ActivityEditComponent, ActivityCalendarAdminComponent],
+  declarations: [ActivityRoutingComponent, ActivityCalendarComponent, ActivityControlComponent, ActivityNewComponent, ActivityEditComponent, ActivityCalendarAdminComponent, ActivityAssistanceComponent],
   imports: [
     NgbModule,
     CommonModule,

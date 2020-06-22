@@ -85,6 +85,7 @@ export class PaymentNewComponent implements OnInit {
       this.congresoSelected = -1;
       this.packageSelected = -1;
       this.newPaymentForm.reset();
+      this.newPaymentForm.patchValue({status: true});
       this.enableInput = false;
     })
     .catch(err => {

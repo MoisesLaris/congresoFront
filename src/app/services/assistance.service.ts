@@ -27,4 +27,17 @@ export class AssistanceService {
       })
     })
   }
+
+  fnGetAssistancesByActivity(idActividad): Promise<any>{
+    return new Promise((resolve,reject) => {
+      this.apiCallService.fnGetPromise([idActividad],APIS_ENUM.GET_ASSISTANCE_BY_ACTIVITY)
+      .then(res => {
+        resolve(res['actividades']);
+      })
+      .catch(() =>{
+        reject();
+      });
+    })
+  }
+
 }
