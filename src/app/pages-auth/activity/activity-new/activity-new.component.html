@@ -70,9 +70,9 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let fecha of arrayDates">
-                                <td>{{fecha.fecha | json}}</td>
-                                <td>{{fecha.horaInicio | json}}</td>
-                                <td>{{fecha.horaFin | json}}</td>
+                                <td>{{fecha.fecha.day}} / {{fecha.fecha.month}} / {{fecha.fecha.year}}</td>
+                                <td>{{fecha.horaInicio.hour}}:{{fecha.horaInicio.minute}} hrs</td>
+                                <td>{{fecha.horaFin.hour}}:{{fecha.horaFin.minute}} hrs</td>
                                 <td>
                                     <a href="javascript:void(0)" class="table-icon-button mx-1" (click)="pop(fecha)" placement="bottom" ngbTooltip="Eliminar fecha">
                                         <i class="fa fa-trash text-danger"></i>
